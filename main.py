@@ -108,14 +108,14 @@ def eval_genomes(genomes, config):
             
         
 def run_neat(config):
-    # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-27')
-    p = neat.Population(config)
+    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-27')
+    # p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
     
-    winner = p.run(eval_genomes, 50)
+    winner = p.run(eval_genomes, 20)
     with open('best.pickle', 'wb') as f:
         pickle.dump(winner, f)
         
@@ -138,4 +138,4 @@ if __name__ == '__main__':
                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
                         config_path)
     run_neat(config)
-    # test_ai(config)
+    test_ai(config)
